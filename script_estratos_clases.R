@@ -45,15 +45,13 @@ rep.col<-function(x,n){
 }
 # Datos de personas del DANE (GEIH)
 # http://formularios.dane.gov.co/Anda_4_1/index.php/catalog/334/study-description
-personas2014 <- read.csv("./datos/PERSONAS 2014.txt",sep="\t") #Lee el archivo base.
+personas2014 <- read.csv("./datos/Personas 2014 small.txt") #Lee el archivo base.
 gc()
 personas2014 <- personas2014[,c("Ingtot", "Fex_c", "Estrato1")]
 gc()
 
 # Se redondea el factor de expansión para facilitar el cálculo.
 personas2014$Fex_c_round <- round(personas2014$Fex_c)
-
-save.image("~/Escritorio/gasto_pobres_vdi/.RData")
 
 # Eliminación de NAs
 data2014 <- na.omit(personas2014)
@@ -83,9 +81,6 @@ es5 <- rep(es5$Ingtot, es5$Fex_c_round)
 es6 <- subset(data2014, data2014$Estrato1==6)
 es6 <- rep(es6$Ingtot, es6$Fex_c_round)
 
-gc()
-
-save.image("~/Escritorio/gasto_pobres_vdi/.RData")
 gc()
 
 # Se termina de definir el límite máximo de ingresos de la clase muy alta.
@@ -131,7 +126,6 @@ for (a in 1:NROW(clases2014)) {
   ingestratos$es6[a] <- NROW(subset(es6, es6<clases2014$max[a] & es6>clases2014$min[a]))
 }
 gc()
-save.image("~/Escritorio/gasto_pobres_vdi/.RData")
 
 # Creación de tabla que dice el porcentaje de personas de cada clase social para cada estrato.
 
