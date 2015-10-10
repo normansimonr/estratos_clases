@@ -28,5 +28,7 @@ Las definiciones de clases sociales han sido hechas de la siguiente manera:
 
 El archivo ``/datos/Personas 2014 small.txt`` es una versión reducida del archivo más grande descargado de la página del  [DANE](http://formularios.dane.gov.co/Anda_4_1/index.php/catalog/334/study-description). Esta reducción no implica cambios en los datos, sino sólo la eliminación de variables irrelevantes para el presente análisis.
 
+El análisis se hace cruzando estratificación de personas con ingresos de personas, en vez de cruzar estratificación del hogar con el ingreso _per cápita_ del hogar. Esto implica que se eliminan los datos de personas con ingresos de 0 y sin datos, lo cual incluye niños y demás miembros económicamente inactivos del hogar. Ya que la unidad de gasto es el hogar y no la persona, esto puede llevar a que el cruce resultante tenga errores. Planeamos que la próxima versión del script corrija esta situación.
+
 _Versión 08 de octubre de 2015_
 
