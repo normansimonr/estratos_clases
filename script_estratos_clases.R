@@ -1,7 +1,7 @@
 # Bienvenido al script de análisis de ingreso y estratificación en Colombia.
 # Puede encontrar el artículo explicativo en http://vasijadeideas.blogspot.com/2015/10/por-que-las-tarifas-de-los-servicios.html
 # Por: Norman Simón Rodríguez
-# Versión 08 de octubre de 2015
+# Versión 17 de octubre de 2015
 
 
 # Líneas de pobreza e indigencia
@@ -47,44 +47,46 @@ rep.col<-function(x,n){
 # http://formularios.dane.gov.co/Anda_4_1/index.php/catalog/334/study-description
 personas2014 <- read.csv("./datos/Personas 2014 small.txt") #Lee el archivo base.
 gc()
-personas2014 <- personas2014[,c("Ingtot", "Fex_c", "Estrato1")]
+personas2014 <- personas2014[,c("Directorio","Secuencia_p", "Estrato1")]
 gc()
+
+# Datos de hogares del DANE (GEIH)
+# http://formularios.dane.gov.co/Anda_4_1/index.php/catalog/334/study-description
+hogares2014 <- read.csv("./datos/Hogares 2014 small.txt")
+hogares2014 <- hogares2014[,c("Directorio", "Secuencia_p", "Ingpcug", "Fex_c")]
+
+
+# Tabla de hogares, estrato e ingreso per capita del hogar
+data2014 <- merge(hogares2014, personas2014)
+data2014 <- unique(data2014)
 
 # Se redondea el factor de expansión para facilitar el cálculo.
-personas2014$Fex_c_round <- round(personas2014$Fex_c)
+data2014$Fex_c_round <- round(data2014$Fex_c)
 
-# Eliminación de NAs
-data2014 <- na.omit(personas2014)
-rm(personas2014)
-gc()
-
-# Eliminación de los individuos que aparecen con ingresos cero (es posible que esto afecte la exactitud de los análisis)
-data2014 <- subset(data2014, data2014$Ingtot!=0)
-gc()
 
 # Creación de vectores de personas (ingresos mensuales) por estrato.
 es1 <- subset(data2014, data2014$Estrato1==1)
-es1 <- rep(es1$Ingtot, es1$Fex_c_round)
+es1 <- rep(es1$Ingpcug, es1$Fex_c_round)
 
 es2 <- subset(data2014, data2014$Estrato1==2)
-es2 <- rep(es2$Ingtot, es2$Fex_c_round)
+es2 <- rep(es2$Ingpcug, es2$Fex_c_round)
 
 es3 <- subset(data2014, data2014$Estrato1==3)
-es3 <- rep(es3$Ingtot, es3$Fex_c_round)
+es3 <- rep(es3$Ingpcug, es3$Fex_c_round)
 
 es4 <- subset(data2014, data2014$Estrato1==4)
-es4 <- rep(es4$Ingtot, es4$Fex_c_round)
+es4 <- rep(es4$Ingpcug, es4$Fex_c_round)
 
 es5 <- subset(data2014, data2014$Estrato1==5)
-es5 <- rep(es5$Ingtot, es5$Fex_c_round)
+es5 <- rep(es5$Ingpcug, es5$Fex_c_round)
 
 es6 <- subset(data2014, data2014$Estrato1==6)
-es6 <- rep(es6$Ingtot, es6$Fex_c_round)
+es6 <- rep(es6$Ingpcug, es6$Fex_c_round)
 
 gc()
 
 # Se termina de definir el límite máximo de ingresos de la clase muy alta.
-clases2014$max[6] <- max(data2014$Ingtot)
+clases2014$max[6] <- max(data2014$Ingpcug)
 
 # Creación de tabla que dicen cuánta gente hay de cada clase en cada estrato.
 
