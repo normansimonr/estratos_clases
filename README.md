@@ -26,7 +26,7 @@ Las definiciones de clases sociales han sido hechas de la siguiente manera:
 
 * __Clase muy alta__: Ingresos de más de 24 veces la linea de pobreza
 
-El archivo ``/datos/Personas 2014 small.txt`` es una versión reducida del archivo más grande descargado de la página del  [DANE](http://formularios.dane.gov.co/Anda_4_1/index.php/catalog/334/study-description). Esta reducción no implica cambios en los datos, sino sólo la eliminación de variables irrelevantes para el presente análisis.
+El archivo ``/datos/Personas 2014 small.txt`` es una versión reducida del archivo más grande descargado de la página del  [DANE](http://formularios.dane.gov.co/Anda_4_1/index.php/catalog/334/study-description). Esta reducción no implica cambios en los datos, sino sólo la eliminación de variables irrelevantes para el presente análisis. El mismo razonamiento aplica para el archivo ``/datos/Hogares 2014 small.txt``.
 
 Segunda versión del script: Se realiza el mismo análisis con los datos de hogares y no de personas.
 
